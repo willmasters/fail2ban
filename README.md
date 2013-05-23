@@ -8,6 +8,7 @@ Die lokale Systemdatei ```jail.local``` beinhaltet verfügbare Filter, sogenannt
 
 ### Filter
 Reguläre Ausdrücke in ```filter.d``` sind auf Logfiles eines Nginx-Webservers optimiert.
+
 Der Nginx-typische Aufbau der Log-Dateien wird also berücksichtigt.
 
 
