@@ -10,7 +10,7 @@ port    = ssh
 filter  = sshd
 logpath  = /var/log/auth.log
 maxretry = 2
-findtime = 600
+findtime = 3600
 bantime  = -1
 
 
