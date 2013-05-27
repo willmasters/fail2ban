@@ -3,25 +3,14 @@
 # 1 month = 2592000
 
 
-[ssh]
+[ssh-auth]
 
 enabled = true
 port    = ssh
-filter  = sshd
+filter  = ssh-auth
 logpath  = /var/log/auth.log
-maxretry = 2
-findtime = 3600
-bantime  = -1
-
-
-[ssh-ddos]
-
-enabled = true
-port    = ssh
-filter  = sshd-ddos
-logpath  = /var/log/auth.log
-maxretry = 6
-findtime = 600
+maxretry = 1
+findtime = 86400
 bantime  = -1
 
 
@@ -44,17 +33,6 @@ port = http,https
 logpath = /var/log/nginx*/access*.log
 maxretry = 1
 findtime = 86400
-bantime  = 2592000
-
-
-[nginx-auth]
-
-enabled = true
-filter = nginx-auth
-port = http,https
-logpath = /var/log/nginx*/error*.log
-maxretry = 2
-findtime = 3600
 bantime  = 2592000
 
 
