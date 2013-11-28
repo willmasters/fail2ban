@@ -3,45 +3,50 @@
 # 1 month = 2592000
 
 
-[ssh-auth]
+[ssh]
 
 enabled = true
 port    = ssh
-filter  = ssh-auth
+filter  = sshd
 logpath  = /var/log/auth.log
-maxretry = 1
-findtime = 86400
-bantime  = -1
+maxretry = 6
 
-
-[nginx-noscript]
-
+[nginx-auth]
 enabled = true
-port    = http,https
-filter  = nginx-noscript
-logpath = /var/log/nginx*/error*.log
-maxretry = 1
-findtime = 86400
-bantime  = 2592000
+filter = nginx-auth
+action = iptables-multiport[name=NoAuthFailures, port="http,https"]
+logpath = /var/log/nginx*/*error*.log
+bantime = 600 # 10 minutes
+maxretry = 6
 
-
-[nginx-badrequests]
-
-enabled  = true
-filter = nginx-badrequests
-port = http,https
-logpath = /var/log/nginx*/access*.log
-maxretry = 1
-findtime = 86400
-bantime  = 2592000
-
+[nginx-login]
+enabled = true
+filter = nginx-login
+action = iptables-multiport[name=NoLoginFailures, port="http,https"]
+logpath = /var/log/nginx*/*access*.log
+bantime = 600 # 10 minutes
+maxretry = 6
 
 [nginx-badbots]
-
 enabled  = true
 filter = nginx-badbots
-port = http,https
-logpath = /var/log/nginx*/access*.log
-maxretry = 2
-findtime = 3600
-bantime  = 2592000
+action = iptables-multiport[name=BadBots, port="http,https"]
+logpath = /var/log/nginx*/*access*.log
+bantime = 86400 # 1 day
+maxretry = 1
+
+[nginx-noscript]
+enabled = true
+action = iptables-multiport[name=NoScript, port="http,https"]
+filter = nginx-noscript
+logpath = /var/log/nginx*/*access*.log
+bantime  = 86400 # 1 day
+maxretry = 6
+
+[nginx-proxy]
+enabled = true
+action = iptables-multiport[name=NoProxy, port="http,https"]
+filter = nginx-proxy
+logpath = /var/log/nginx*/*access*.log
+bantime  = 86400 # 1 day
+maxretry = 0
