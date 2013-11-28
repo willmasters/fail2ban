@@ -38,7 +38,7 @@ maxretry = 1
 [nginx-badrequests]
 enabled  = true
 filter = nginx-badrequests
-port = http,https
+action = iptables-multiport[name=BadReqs, port="http,https"]
 logpath = /var/log/nginx*/access*.log
 bantime = 86400 # 1 day
 maxretry = 1
