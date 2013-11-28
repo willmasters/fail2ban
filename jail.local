@@ -43,7 +43,7 @@ enabled  = true
 filter = nginx-badrequests
 action = iptables-multiport[name=BadReqs, port="http,https"]
 logpath = /var/log/nginx*/access*.log
-bantime = 86400
+bantime = 2592000
 maxretry = 1
 
 [nginx-noscript]
