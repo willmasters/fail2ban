@@ -2,7 +2,7 @@
 # 1 day = 86400
 # 1 month = 2592000
 
-[DEFAULT}
+[DEFAULT]
 findtime = 600
 bantime = 900
 
